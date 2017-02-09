@@ -12,7 +12,8 @@ import org.junit.Test;
 public class PersonaTest
 {
     private Persona persona1;
-    private Persona persona2;    
+    private Persona persona2;
+    private Persona persona3;
     private Comida comida1;
     private Comida comida2;
     private Comida comida3;
@@ -36,6 +37,7 @@ public class PersonaTest
     {
         persona1 = new Persona("Ana", false, 55, 160, 24);
         persona2 = new Persona("Luis", true, 92, 193, 37);
+        persona3 = new Persona("Oscar", true, 88, 185, 24);
         comida1 = new Comida("Paella", 800);
         comida2 = new Comida("Pizza", 1200);
         comida3 = new Comida("Lentejas", 600);
@@ -146,7 +148,22 @@ public class PersonaTest
         assertEquals("¿TE LLAMAS LUIS?", persona2.contestar("¿Te llamas Luis?"));          
         
     }
+
+    @Test
+    public void Test0175()
+    {
+        assertEquals(null, persona1.getAlimentoMasCaloricoConsumido());
+        assertEquals(1200, persona2.comer(comida2));
+        assertEquals(269, persona2.comer(comida5));
+        assertEquals(1200, persona2.getAlimentoMasCaloricoConsumido());
+        assertEquals(269, persona3.comer(comida5));
+        assertEquals(800, persona3.comer(comida1));
+        assertEquals(1200, persona3.comer(comida2));
+        assertEquals(-1, persona3.comer(comida3));
+        assertEquals(true, persona3.getAlimentoMasCaloricoConsumido());
+    }
 }
+
 
 
 
