@@ -9,11 +9,13 @@ public class Comida
 {
     // Atributo para las calorias de la comida
     private int calorias;
+    private String nombreComida;
     /**
      * Constructor for objects of class Comida
      */
     public Comida(String nombreComida, int calorias)
     {
+        this.nombreComida = nombreComida;
         this.calorias = calorias;
     }
 
@@ -23,5 +25,12 @@ public class Comida
     public int getCalorias()
     {
         return calorias;
+    }
+    
+    /**
+     * Metodo que devuelve el nombre de una comida
+     */
+    public String getNombreComida(){
+        return nombreComida;
     }
 }

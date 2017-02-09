@@ -21,6 +21,11 @@ public class Persona
     private int metabolismoBasal;
     // atributo calorias ingeridas
     private int caloriasIngeridas;
+    // Atributo para alimento mas calorico.
+    private Comida alimentoMasCalorico;
+    // Atributo para guardar la comida mas calorica ya consumida
+    private Comida comidaYaConsumida;
+
     /**
      * Constructor for objects of class Persona
      * Si el booleano hombre es igual true la persona es un hombre y si es false 
@@ -38,9 +43,11 @@ public class Persona
         this.edad = edad;
         metabolismoBasal = 0;
         caloriasIngeridas = 0;
-
+        alimentoMasCalorico = null;
+        
+        comidaYaConsumida = null;
     }
-    
+
     /**
      * Metodo que permite obtener el metabolismo basal de la persona
      */
@@ -85,6 +92,17 @@ public class Persona
             }
         }
 
+        if (comidaYaConsumida == null){
+            comidaYaConsumida = comida;
+            alimentoMasCalorico = comida;
+        }
+        else{
+            if (comida.getCalorias() >= comidaYaConsumida.getCalorias()){
+                alimentoMasCalorico = comida;
+                comidaYaConsumida = comida;
+            }
+        }
+
         return calorias;
     }
 
@@ -107,12 +125,25 @@ public class Persona
                 respuesta = "NO";
             }
         }
-        
+
         if (getCaloriasIngeridas() > getMetabolismoBasal() || pregunta.contains(nombre)) {
             respuesta = pregunta.toUpperCase();
         }
         System.out.println(respuesta);
         return respuesta;
+    }
+
+    /**
+     * 
+     */
+    public Comida getAlimentoMasCaloricoConsumido(){
+        if (alimentoMasCalorico == null){
+            System.out.println("No ha consumido nada");
+        }
+        else{
+            System.out.println(alimentoMasCalorico.getNombreComida());
+        }
+        return alimentoMasCalorico;
     }
 
 }
