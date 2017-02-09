@@ -2,32 +2,26 @@
 /**
  * Write a description of class Comida here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author oschariv(Oscar Charro Rivera) 
+ * @version 1.0(09-02-2017)
  */
 public class Comida
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    // Atributo para las calorias de la comida
+    private int calorias;
     /**
      * Constructor for objects of class Comida
      */
-    public Comida()
+    public Comida(String nombreComida, int calorias)
     {
-        // initialise instance variables
-        x = 0;
+        this.calorias = calorias;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Metodo que devuelve las calorias de las comidas
      */
-    public int sampleMethod(int y)
+    public int getCalorias()
     {
-        // put your code here
-        return x + y;
+        return calorias;
     }
 }
