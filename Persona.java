@@ -7,6 +7,8 @@
  */
 public class Persona
 {
+    // atributo que guarda la variale nombre
+    private String nombre;
     // atributo para saber si en hombre o mujer.
     private boolean hombre;
     // atributo para saber el peso de la persona.
@@ -15,10 +17,8 @@ public class Persona
     private int altura;
     // atributo para saber la edad de la persona.
     private int edad;
-    // Metabolismo basal hombres
-    private int metabolismoBasalHombres;
-    // Metabolismo basal mujeres
-    private int metabolismoBasalMujeres;
+    // Atributo del Metabolismo basal
+    private int metabolismoBasal;
     // atributo calorias ingeridas
     private int caloriasIngeridas;
     /**
@@ -31,14 +31,32 @@ public class Persona
      */
     public Persona(String nombrePersona, boolean hombre, int peso, int altura, int edad)
     {
+        nombre = nombrePersona;
         this.hombre = hombre;
         this.peso = peso;
         this.altura = altura;
         this.edad = edad;
-        metabolismoBasalHombres = 0;
-        metabolismoBasalMujeres = 0;
+        metabolismoBasal = 0;
         caloriasIngeridas = 0;
-        
+
+    }
+    
+    /**
+     * Metodo que permite obtener el metabolismo basal de la persona
+     */
+    public int getMetabolismoBasal(){
+
+        if (hombre){
+            // Hombres = (10 x peso en kg) + (6 × altura en cm) 
+            //- (5 × edad en años) + 5 
+            metabolismoBasal = (10 * peso) + (6 * altura) + (5 * edad) + 5;
+        }
+        else{
+            // Mujeres = (10 x peso en kg) + (6 × altura en cm) 
+            //- (5 × edad en años) - 161
+            metabolismoBasal = (10 * peso) + (6 * altura) + (5 * edad) - 161;
+        }
+        return metabolismoBasal;
     }
 
     /**
@@ -47,40 +65,55 @@ public class Persona
     public int comer(Comida comida)
     {
         int calorias = -1;
-        
+
         if (hombre){
-           // Hombres = (10 x peso en kg) + (6 × altura en cm) 
-           //- (5 × edad en años) + 5 
-           metabolismoBasalHombres = (10 * peso) + (6 * altura) + (5 * edad) + 5;
-           if (caloriasIngeridas <= metabolismoBasalHombres){
-               calorias = comida.getCalorias();
-               caloriasIngeridas += calorias;
-           }
-           else{
-               System.out.println("No puedo comer mas");
-           }
+            if (caloriasIngeridas <= getMetabolismoBasal()){
+                calorias = comida.getCalorias();
+                caloriasIngeridas += calorias;
+            }
+            else{
+                System.out.println("No puedo comer mas");
+            }
         }
         else{
-            // Mujeres = (10 x peso en kg) + (6 × altura en cm) 
-            //- (5 × edad en años) - 161
-            metabolismoBasalMujeres = (10 * peso) + (6 * altura) + (5 * edad) - 161;
-            if (caloriasIngeridas <= metabolismoBasalMujeres){
-               calorias = comida.getCalorias();
-               caloriasIngeridas += calorias;
-           }
-           else{
-               System.out.println("No puedo comer mas");
-           }
+            if (caloriasIngeridas <= getMetabolismoBasal()){
+                calorias = comida.getCalorias();
+                caloriasIngeridas += calorias;
+            }
+            else{
+                System.out.println("No puedo comer mas");
+            }
         }
-        
+
         return calorias;
     }
-    
+
     /**
      * Metodo que permite conocer las calorias ingeridas.
      */
     public int getCaloriasIngeridas(){
         return caloriasIngeridas;
     }
-    
+
+    /**
+     * Metodo que permite realizar preguntas a la persona.
+     */
+    public String contestar(String pregunta){
+        String respuesta = "";
+        if (getCaloriasIngeridas() <= getMetabolismoBasal()){
+            if (pregunta.length()%3 == 0){
+                respuesta = "SI";
+            }else{
+                respuesta = "NO";
+            }
+        }
+        
+        if (getCaloriasIngeridas() > getMetabolismoBasal() || pregunta.contains(nombre)) {
+            respuesta = pregunta.toUpperCase();
+        }
+        System.out.println(respuesta);
+        return respuesta;
+    }
+
 }
+
