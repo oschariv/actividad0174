@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 /**
  * Write a description of class Persona here.
  * 
@@ -25,6 +25,8 @@ public class Persona
     private Comida alimentoMasCalorico;
     // Atributo para guardar la comida mas calorica ya consumida
     private Comida comidaYaConsumida;
+    
+    private ArrayList<Comida> comidasIngeridas;
 
     /**
      * Constructor for objects of class Persona
@@ -46,6 +48,8 @@ public class Persona
         alimentoMasCalorico = null;
         
         comidaYaConsumida = null;
+        
+        comidasIngeridas = new ArrayList<Comida>();
     }
 
     /**
@@ -73,24 +77,14 @@ public class Persona
     {
         int calorias = -1;
 
-        if (hombre){
-            if (caloriasIngeridas <= getMetabolismoBasal()){
+        if (caloriasIngeridas <= getMetabolismoBasal()){
                 calorias = comida.getCalorias();
                 caloriasIngeridas += calorias;
-            }
-            else{
-                System.out.println("No puedo comer mas");
-            }
         }
         else{
-            if (caloriasIngeridas <= getMetabolismoBasal()){
-                calorias = comida.getCalorias();
-                caloriasIngeridas += calorias;
-            }
-            else{
                 System.out.println("No puedo comer mas");
-            }
         }
+        
 
         if (comidaYaConsumida == null){
             comidaYaConsumida = comida;
@@ -145,6 +139,12 @@ public class Persona
         }
         return alimentoMasCalorico;
     }
-
+    
+    /**
+     * 
+     */
+    public void verListadoComidasIngeridas(){
+        
+    }
 }
 
